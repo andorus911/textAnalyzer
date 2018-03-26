@@ -1,6 +1,7 @@
 const url = require('url');
 
 const render = require('../lib/render');
+const urlAnalyze = require('../lib/urlAnalyze');
 
 function analyze(request, response) {
     render('index.html', (error, html) =>{
@@ -16,6 +17,7 @@ function analyze(request, response) {
 
     const urls = url.parse(request.url, true).query;
     console.log(urls);
+    urlAnalyze(urls); // TODO: add promises?
 }
 
 module.exports = analyze;
