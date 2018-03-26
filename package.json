@@ -1,0 +1,31 @@
+{
+  "name": "textanalyzer",
+  "version": "1.0.0",
+  "description": "NA",
+  "main": "server.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "pdfkit": "^0.8.3"
+  },
+  "scripts": {
+    "test": "node server",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andorus911/textAnalyzer.git"
+  },
+  "keywords": [
+    "textanalyzer",
+    "nodejs"
+  ],
+  "author": "Drew Long",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/andorus911/textAnalyzer/issues"
+  },
+  "homepage": "https://github.com/andorus911/textAnalyzer#readme"
+}
