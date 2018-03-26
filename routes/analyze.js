@@ -21,15 +21,15 @@ function analyze(request, response) {
                     analizedWords[1].wordName,
                     analizedWords[2].wordName)
             });
-            if (url === urls[0]) emitter.emit('analyze:complete');
+            if (url === urls[0]) emitter.emit('analyze:complete'); // alternatives?
         });
 
     emitter.on('analyze:complete', () => {
-        createPDF(table, response);
+        uploadPDF(table, response);
     });    
 }
 
-function createPDF(table, response) {
+function uploadPDF(table, response) {
     let doc = new PDFDocument();
     doc.pipe(response);
 
