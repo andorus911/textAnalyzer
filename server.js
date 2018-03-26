@@ -1,10 +1,12 @@
 const http = require('http');
 
-const { home, notFound } = require('./routes');
+const { home, analyze, notFound } = require('./routes');
 
 http.createServer((request, response) => {
     if (request.url === '/') {
         home(request, response);
+    } else if (request.url.startsWith('/analyze')) {
+        analyze(request, response);
     } else {
         notFound(request, response);
     }
