@@ -1,3 +1,11 @@
 const http = require('http');
 
-http.createServer().listen(3000, () => console.info('Server online'));
+const { home, notFound } = require('./routes');
+
+http.createServer((request, response) => {
+    if (request.url === '/') {
+        home(request, response);
+    } else {
+        notFound(request, response);
+    }
+}).listen(3000, () => console.info('Server online'));
