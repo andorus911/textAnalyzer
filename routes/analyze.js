@@ -22,7 +22,7 @@ function analyze(request, response) {
                     analizedWords[2].wordName)
             });
             if (url === urls[0]) emitter.emit('analyze:complete');
-        }); // TODO: add promises?
+        });
 
     emitter.on('analyze:complete', () => {
         createPDF(table, response);
