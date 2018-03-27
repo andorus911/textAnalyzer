@@ -1,35 +1,20 @@
 const url = require('url');
-const fs = require('fs');
-const eventEmitter = require('events');
 
 const PDFDocument = require('pdfkit');
 
 const urlAnalyze = require('../lib/urlAnalyze');
 
 function analyze(request, response) {
-
-    const emitter = new eventEmitter.EventEmitter();
     const urls = url.parse(request.url, true).query.urls.split(' ');
 
-    let table = [];
-    let counter = urls.length;
+    let promises = [];
 
     for (let url of urls)
-        urlAnalyze(url, analizedWords => {
-            table = table.concat({
-                url,
-                bestOfTheBest: Array.of(
-                    analizedWords[0].wordName,
-                    analizedWords[1].wordName,
-                    analizedWords[2].wordName)
-            });
-            counter --;
-            if (counter < 1) emitter.emit('analyze:complete'); // alternatives?
-        });
+        promises.push(urlAnalyze(url));
 
-    emitter.on('analyze:complete', () => {
-        uploadPDF(table, response);
-    });    
+    Promise.all(promises)
+        .then(values => uploadPDF(values, response))
+        .catch(error => console.error(error));
 }
 
 function uploadPDF(table, response) {
