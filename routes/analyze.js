@@ -1,6 +1,7 @@
 const url = require('url');
 const fs = require('fs');
 const eventEmitter = require('events');
+
 const PDFDocument = require('pdfkit');
 
 const urlAnalyze = require('../lib/urlAnalyze');
@@ -11,6 +12,7 @@ function analyze(request, response) {
     const urls = url.parse(request.url, true).query.urls.split(' ');
 
     let table = [];
+    let times = urls.length;
 
     for (let url of urls)
         urlAnalyze(url, analizedWords => {
@@ -21,7 +23,8 @@ function analyze(request, response) {
                     analizedWords[1].wordName,
                     analizedWords[2].wordName)
             });
-            if (url === urls[0]) emitter.emit('analyze:complete'); // alternatives?
+            times --;
+            if (times < 1) emitter.emit('analyze:complete'); // alternatives?
         });
 
     emitter.on('analyze:complete', () => {
