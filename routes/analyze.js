@@ -12,7 +12,7 @@ function analyze(request, response) {
     const urls = url.parse(request.url, true).query.urls.split(' ');
 
     let table = [];
-    let times = urls.length;
+    let counter = urls.length;
 
     for (let url of urls)
         urlAnalyze(url, analizedWords => {
@@ -23,8 +23,8 @@ function analyze(request, response) {
                     analizedWords[1].wordName,
                     analizedWords[2].wordName)
             });
-            times --;
-            if (times < 1) emitter.emit('analyze:complete'); // alternatives?
+            counter --;
+            if (counter < 1) emitter.emit('analyze:complete'); // alternatives?
         });
 
     emitter.on('analyze:complete', () => {
