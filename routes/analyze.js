@@ -33,6 +33,7 @@ function uploadPDF(table, response) {
     let doc = new PDFDocument();
     doc.pipe(response);
 
+    doc.font('./fonts/ConsolaMono.ttf');
     table.forEach(row => {
         doc.text(`${row.url} \| ${row.bestOfTheBest}`);
         doc.text(`\n____________________________________________\n`);
