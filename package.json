@@ -6,7 +6,10 @@
   "directories": {
     "lib": "lib"
   },
-  "dependencies": {},
+  "dependencies": {
+    "parse-entities": "^1.1.1",
+    "string-strip-html": "^1.3.2"
+  },
   "devDependencies": {
     "pdfkit": "^0.8.3"
   },
